@@ -1,7 +1,9 @@
-/* Base Styles */
+/* Mobile-first approach */
 body {
   background-color: #dedede;
   font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 h1 {
@@ -19,61 +21,81 @@ p {
   text-align: center;
 }
 
-/* Grid Styles */
-div {
+main {
   display: grid;
   grid-template-columns: 1fr;
   gap: 10px;
-  margin: 5px;
-  padding: 2px;
+  padding: 10px;
+}
+
+div {
+  background-color: white;
+  padding: 10px;
+  text-align: center;
+  border: 2px solid #ccc;
 }
 
 div img {
   width: 100%;
   height: auto;
-  border-radius: 0; /* Remove border radius by default */
+  display: block;
+  margin: auto;
 }
 
 /* Tablet View (772px) */
 @media screen and (min-width: 772px) {
+  main {
+    grid-template-columns: 1fr 1fr;
+  }
+
   div {
-    grid-template-columns: repeat(2, 1fr);
+    border-radius: 50%;
   }
-  
-  div img {
-    border-radius: 50%; /* Circular shape for images */
-  }
-  
-  div img:last-of-type {
-    grid-column: span 2; /* Last image spans both columns */
+
+  /* Last figure takes up both columns */
+  div:last-child {
+    grid-column: span 2;
   }
 }
 
 /* Large Screen View (992px) */
 @media screen and (min-width: 992px) {
-  div img:nth-of-type(3n) {
-    grid-column: span 2; /* Every third image spans both columns */
-    border-radius: 0; /* Remove circular shape */
+  main {
+    grid-template-columns: 1fr 1fr 1fr;
   }
-}
 
-/* Accessibility and Dark Color Scheme */
-@media screen and (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto; /* Remove scroll behavior */
+  /* Every third figure takes up both columns */
+  div:nth-child(3n) {
+    grid-column: span 2;
   }
-}
 
-@media screen and (prefers-color-scheme: dark) {
+  /* Remove border-radius from all figures */
   div {
-    background-color: #333; /* Dark background color for figures */
+    border-radius: 0;
   }
-  
-  div a {
-    color: #ffffcc; /* Lighter font color */
+}
+
+/* Prefers Reduced Motion (Removes scrolling behavior) */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
-  
-  div img {
-    border-color: #000; /* Black border color */
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #222;
+    color: #f5e663; /* Light yellow text */
+  }
+
+  div {
+    background-color: #333;
+    color: #f5e663;
+    border: 2px solid black;
+  }
+
+  a {
+    color: #f5e663;
   }
 }
